@@ -17,7 +17,7 @@ db: the pump function (RunPump) is already running.
 
 function RunCheck() {
     if (mililiters_to_draw < 0) {
-        speed * (-1)
+        speed = speed * -1
     }
 
     if (mililiters_to_draw > total_cup_capcity_ml) {
@@ -41,7 +41,7 @@ basic.showString("O")
 function RunPump(duration: number, pump_speed: number) {
     if (pump_running) {
         basic.showString("DB")
-        return 
+        return
     }
 
     basic.showString("P")
@@ -55,7 +55,7 @@ function RunPump(duration: number, pump_speed: number) {
     pump_running = false
     basic.showString("O")
 
-    
+
 }
 
 function DrawMililiters(ml: number) {
