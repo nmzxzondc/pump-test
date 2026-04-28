@@ -15,15 +15,19 @@ lib: the SuperBitV2 library was either not found/installed or SuperBitV2.enMotor
 db: the pump function (RunPump) is already running.
  */
 
-while (!SuperBitV2.enMotors.M1) {
-    basic.showString("lib")
-    basic.pause(10 * 1000)
-}
-
-while (mililiters_to_draw < 0 || mililiters_to_draw > total_cup_capcity_ml) {
+function RunCheck() {
+    if (mililiters_to_draw < 0 || mililiters_to_draw > total_cup_capcity_ml) {
         basic.showString("ML")
         basic.pause(10 * 1000)
+    }
+
+    if (!SuperBitV2.enMotors.M1) {
+        basic.showString("lib")
+        basic.pause(10 * 1000)
+    }
 }
+
+basic.forever(RunCheck)
 
 basic.showString("O")
 
