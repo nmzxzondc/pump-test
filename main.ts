@@ -25,6 +25,8 @@ function RunCheck() {
         basic.showString("lib")
         basic.pause(10 * 1000)
     }
+
+    return
 }
 
 basic.forever(RunCheck)
@@ -34,10 +36,6 @@ basic.showString("O")
 function RunPump(duration: number, pump_speed: number) {
     if (pump_running) {
         basic.showString("DB")
-
-        basic.pause(2 * 1000)
-
-        basic.showString("P")
         return
     }
 
