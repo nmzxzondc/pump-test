@@ -22,19 +22,13 @@ function showString(text: string) {
 
 
 function RunCheck() {
-    
-
     if (milliliters_to_draw < 0) {
         speed = speed * -1
     }
-
     if (milliliters_to_draw > total_cup_capcity_ml) {
-        basic.clearScreen()
-
         showString("ML")
         basic.pause(10 * 1000)
     }
-
     if (!SuperBitV2.enMotors.M1) {
         showString("LIB")
         basic.pause(10 * 1000)
@@ -44,10 +38,11 @@ function RunCheck() {
 }
 
 basic.showString("O")
-
-//basic.forever(RunCheck)
+basic.forever(RunCheck)
 
 function RunPump(duration: number, pump_speed: number, debounce: boolean) {
+    showString("P")
+
     SuperBitV2.MotorRun(SuperBitV2.enMotors.M1, pump_speed)
     basic.pause(5 * 1000)
     SuperBitV2.MotorStopAll
