@@ -1,5 +1,5 @@
 let test_to_get_time_to_fill_cup = true
-let test_duration = 10
+let test_duration_secs = 10
 
 let pump_running = false
 let pump_speed = 255
@@ -69,7 +69,7 @@ basic.forever(function () {
         } else {
             showString("T")
             pump_running = true
-            RunPump(test_duration * 1000)
+            RunPump(test_duration_secs * 1000)
             pump_running = false
         }
 
