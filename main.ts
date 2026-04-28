@@ -15,6 +15,12 @@ lib: the SuperBitV2 library was either not found/installed or SuperBitV2.enMotor
 db: the pump function (RunPump) is already running.
  */
 
+function showString(text: string) {
+    basic.clearScreen()
+    basic.showString(text)
+}
+
+
 function RunCheck() {
     
 
@@ -25,14 +31,12 @@ function RunCheck() {
     if (milliliters_to_draw > total_cup_capcity_ml) {
         basic.clearScreen()
 
-        basic.showString("ML")
+        showString("ML")
         basic.pause(10 * 1000)
     }
 
     if (!SuperBitV2.enMotors.M1) {
-        basic.clearScreen()
-        
-        basic.showString("lib")
+        showString("LIB")
         basic.pause(10 * 1000)
     }
 
@@ -48,24 +52,28 @@ function RunPump(duration: number, pump_speed: number, debounce: boolean) {
     basic.pause(5 * 1000)
     SuperBitV2.MotorStopAll
 
-    basic.showString("O")
+    showString("O")
 }
 
 function DrawMilliliters(ml: number) {
     let time_to_fill = time_to_fill_1ml * ml
     RunPump(time_to_fill, speed, pump_running)
 
-    basic.clearScreen()
-    basic.showString("FINI")
-
+    showString("FINI")
 }
 
 basic.forever(function() {
     if (!pump_running && input.buttonIsPressed(Button.A)) {
-        basic.showString("P")
+        showString("P")
         pump_running = true
         DrawMilliliters(milliliters_to_draw)
         pump_running = false
+    }
+})
+
+input.onButtonPressed(Button.A, function() {
+    if (pump_running) {
+        showString("db")
     }
 })
     
