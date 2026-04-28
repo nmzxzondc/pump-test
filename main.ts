@@ -1,4 +1,5 @@
-let get_time_to_fill_cup = true
+let test_to_get_time_to_fill_cup = true
+let test_duration = 10
 
 let pump_running = false
 let pump_speed = 255
@@ -60,7 +61,7 @@ function DrawMilliliters(ml: number) {
 
 basic.forever(function () {
     if (!pump_running && input.buttonIsPressed(Button.A)) {
-        if (!get_time_to_fill_cup) {
+        if (!test_to_get_time_to_fill_cup) {
             showString("P")
             pump_running = true
             DrawMilliliters(milliliters_to_draw)
@@ -68,7 +69,7 @@ basic.forever(function () {
         } else {
             showString("T")
             pump_running = true
-            RunPump(10 * 1000)
+            RunPump(test_duration * 1000)
             pump_running = false
         }
 
