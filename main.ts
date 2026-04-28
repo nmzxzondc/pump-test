@@ -33,10 +33,11 @@ basic.forever(RunCheck)
 
 basic.showString("O")
 
+
 function RunPump(duration: number, pump_speed: number) {
     if (pump_running) {
         basic.showString("DB")
-        return
+        return 
     }
 
     basic.showString("P")
@@ -44,11 +45,13 @@ function RunPump(duration: number, pump_speed: number) {
     pump_running = true
 
     SuperBitV2.MotorRun(SuperBitV2.enMotors.M1, pump_speed)
-    basic.pause(duration)
+    basic.pause(2 * 1000)
     SuperBitV2.MotorStopAll
 
     pump_running = false
-    basic.showString("")
+    basic.showString("O")
+
+    
 }
 
 function DrawMililiters(ml: number) {
