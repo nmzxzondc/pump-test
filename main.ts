@@ -44,7 +44,7 @@ function RunPump(duration: number, debounce: boolean) {
     showString("P")
 
     SuperBitV2.MotorRun(SuperBitV2.enMotors.M1, pump_speed)
-    basic.pause(5 * 1000)
+    basic.pause(duration)
     SuperBitV2.MotorStopAll
 
     showString("O")
