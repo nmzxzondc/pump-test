@@ -16,14 +16,12 @@ lib: the SuperBitV2 library was either not found/installed or SuperBitV2.enMotor
 db: the pump is already running
  */
 
-if (!SuperBitV2.enMotors.M1) {
+while (!SuperBitV2.enMotors.M1) {
     basic.showString("lib")
-    basic.forever(function () {
-        basic.pause(5 * 1000)
-    })
-} else {
-    basic.showString("O")
+    basic.pause(10 * 1000)
 }
+
+basic.showString("O")
 
 function RunPump(duration: number, pumpspeed: number) {
     if (pump_running) {
