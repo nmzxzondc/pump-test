@@ -9,11 +9,10 @@ let time_to_fill_1ml = (time_to_fill_cup / total_cup_capcity_ml)
 
 // if you change the speed, record the time it takes to fill a cup up again
 /*
-
 error codes: 
 ml: the mililiters_to_draw is below 0 or greater than the cup's total capacity
 lib: the SuperBitV2 library was either not found/installed or SuperBitV2.enMotors.M1 was not found
-db: the pump is already running
+db: the pump function (RunPump) is already running.
  */
 
 while (!SuperBitV2.enMotors.M1) {
