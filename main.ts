@@ -12,9 +12,8 @@ let time_to_fill_1ml = (time_to_fill_cup / total_cup_capcity_ml)
 
 error codes: 
 ml: the mililiters_to_draw is below 0 or greater than the cup's total capacity
-lib: the SuperBitV2 library was either not found or SuperBitV2.MotorRun was not found
-db: the pump is already running
-hi: the pump speed exceeds 255 or is less then -255.
+lib: the SuperBitV2 library was either not found/installed or SuperBitV2.enMotors.M1 was not found
+db: the pump  is already running
  */
 
 if (!SuperBitV2.enMotors.M1) {
@@ -33,11 +32,6 @@ function RunPump(duration: number, pumpspeed: number) {
         basic.pause(2 * 1000)
 
         basic.showString("P")
-        return
-    }
-
-    if (pumpspeed > 255 || pumpspeed < -255) {
-        basic.showString("hi")
         return
     }
 
@@ -62,4 +56,3 @@ function DrawMililiters(ml: number) {
 input.onButtonPressed(Button.A, function () {
     DrawMililiters(mililiters_to_draw)
 })
-
