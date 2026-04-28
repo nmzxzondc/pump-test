@@ -1,5 +1,5 @@
 let pump_running = false
-let speed = 255
+let pump_speed = 255
 
 let milliliters_to_draw = 250
 
@@ -7,7 +7,7 @@ let total_cup_capcity_ml = 798
 let time_to_fill_cup = 10
 let time_to_fill_1ml = (time_to_fill_cup / total_cup_capcity_ml)
 
-// if you change the speed, record the time it takes to fill the cup up again
+// if you change the pump_speed, record the time it takes to fill the cup up again
 /*
 error codes: 
 ml: the milliliters_to_draw is greater than the cup's total capacity
@@ -23,7 +23,7 @@ function showString(text: string) {
 
 function RunCheck() {
     if (milliliters_to_draw < 0) {
-        speed = speed * -1
+        pump_speed = pump_speed * -1
     }
     if (milliliters_to_draw > total_cup_capcity_ml) {
         showString("ML")
@@ -40,7 +40,7 @@ function RunCheck() {
 basic.showString("O")
 basic.forever(RunCheck)
 
-function RunPump(duration: number, pump_speed: number, debounce: boolean) {
+function RunPump(duration: number, debounce: boolean) {
     showString("P")
 
     SuperBitV2.MotorRun(SuperBitV2.enMotors.M1, pump_speed)
@@ -52,12 +52,12 @@ function RunPump(duration: number, pump_speed: number, debounce: boolean) {
 
 function DrawMilliliters(ml: number) {
     let time_to_fill = time_to_fill_1ml * ml
-    RunPump(time_to_fill, speed, pump_running)
+    RunPump(time_to_fill, pump_running)
 
     showString("FINI")
 }
 
-basic.forever(function() {
+basic.forever(function () {
     if (!pump_running && input.buttonIsPressed(Button.A)) {
         showString("P")
         pump_running = true
@@ -66,9 +66,8 @@ basic.forever(function() {
     }
 })
 
-input.onButtonPressed(Button.A, function() {
+input.onButtonPressed(Button.A, function () {
     if (pump_running) {
         showString("db")
     }
 })
-    
