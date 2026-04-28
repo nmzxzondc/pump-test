@@ -1,3 +1,5 @@
+let get_time_to_fill_cup = true
+
 let pump_running = false
 let pump_speed = 255
 
@@ -40,7 +42,7 @@ function RunCheck() {
 basic.showString("O")
 basic.forever(RunCheck)
 
-function RunPump(duration: number, debounce: boolean) {
+function RunPump(duration: number) {
     showString("P")
 
     SuperBitV2.MotorRun(SuperBitV2.enMotors.M1, pump_speed)
@@ -52,17 +54,27 @@ function RunPump(duration: number, debounce: boolean) {
 
 function DrawMilliliters(ml: number) {
     let time_to_fill = time_to_fill_1ml * ml
-    RunPump(time_to_fill, pump_running)
+    RunPump(time_to_fill)
 
     showString("FINI")
 }
 
+
 basic.forever(function () {
     if (!pump_running && input.buttonIsPressed(Button.A)) {
-        showString("P")
-        pump_running = true
-        DrawMilliliters(milliliters_to_draw)
-        pump_running = false
+        if (!get_time_to_fill_cup) {
+            showString("P")
+            pump_running = true
+            DrawMilliliters(milliliters_to_draw)
+            pump_running = false
+        } else {
+            showString("T")
+            pump_running = true
+            RunPump(10 * 1000)
+            pump_running = false
+        }
+
+        
     }
 })
 
