@@ -20,9 +20,14 @@ while (!SuperBitV2.enMotors.M1) {
     basic.pause(10 * 1000)
 }
 
+while (mililiters_to_draw < 0 || mililiters_to_draw > total_cup_capcity_ml) {
+        basic.showString("ml")
+        basic.pause(10 * 1000)
+}
+
 basic.showString("O")
 
-function RunPump(duration: number, pumpspeed: number) {
+function RunPump(duration: number, pump_speed: number) {
     if (pump_running) {
         basic.showString("db")
 
@@ -36,19 +41,16 @@ function RunPump(duration: number, pumpspeed: number) {
 
     pump_running = true
 
-    SuperBitV2.MotorRun(SuperBitV2.enMotors.M1, pumpspeed)
+    SuperBitV2.MotorRun(SuperBitV2.enMotors.M1, pump_speed)
     basic.pause(duration)
     SuperBitV2.MotorStopAll
 
     pump_running = false
-    basic.showString("0")
+    basic.showString("")
 }
 
 function DrawMililiters(ml: number) {
-    if (ml < 0 || ml > total_cup_capcity_ml) {
-        basic.showString("ml")
-        return
-    }
+
     let time_to_fill = time_to_fill_1ml * ml
     RunPump(time_to_fill, speed)
 }
