@@ -7,7 +7,7 @@ let total_cup_capcity_ml = 798
 let time_to_fill_cup = 10
 let time_to_fill_1ml = (time_to_fill_cup / total_cup_capcity_ml)
 
-// if you change the speed, record the time it takes to fill a cup up again
+// if you change the speed, record the time it takes to fill the cup up again
 /*
 error codes: 
 ml: the milliliters_to_draw is greater than the cup's total capacity
@@ -16,16 +16,22 @@ db: the pump function (RunPump) is already running.
  */
 
 function RunCheck() {
+    
+
     if (milliliters_to_draw < 0) {
         speed = speed * -1
     }
 
     if (milliliters_to_draw > total_cup_capcity_ml) {
+        basic.clearScreen()
+
         basic.showString("ML")
         basic.pause(10 * 1000)
     }
 
     if (!SuperBitV2.enMotors.M1) {
+        basic.clearScreen()
+        
         basic.showString("lib")
         basic.pause(10 * 1000)
     }
@@ -33,34 +39,49 @@ function RunCheck() {
     return
 }
 
-basic.forever(RunCheck)
-
 basic.showString("O")
 
+basic.forever(RunCheck)
 
-function RunPump(duration: number, pump_speed: number) {
-    if (pump_running) {
-        basic.showString("DB")
+
+
+function RunPump(duration: number, pump_speed: number, debounce: boolean) {
+    if (debounce) {
+        basic.showString("db")
         return
     }
 
+    pump_running = true
     basic.showString("P")
 
-    pump_running = true
-
     SuperBitV2.MotorRun(SuperBitV2.enMotors.M1, pump_speed)
-    basic.pause(duration)
+    basic.pause(10 * 1000)
     SuperBitV2.MotorStopAll
 
-    pump_running = false
     basic.showString("O")
 }
 
 function Drawmilliliters(ml: number) {
+
+    if (pump_running) {
+        basic.clearScreen()
+        basic.showString("A")
+        return
+    }
+    
+
     let time_to_fill = time_to_fill_1ml * ml
-    RunPump(time_to_fill, speed)
+    RunPump(time_to_fill, speed, pump_running)
+
+    basic.clearScreen()
+    basic.showString("FINI")
+    pump_running = false
 }
 
 input.onButtonPressed(Button.A, function () {
+    
+    
     Drawmilliliters(milliliters_to_draw)
+
+    
 })
