@@ -1,7 +1,7 @@
 let pump_running = false
 let speed = 255
 
-let mililiters_to_draw = 800
+let mililiters_to_draw = 250
 
 let total_cup_capcity_ml = 798
 let time_to_fill_cup = 10
