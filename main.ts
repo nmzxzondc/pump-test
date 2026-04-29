@@ -85,7 +85,11 @@ basic.forever(function () {
 }) */ // old version
 
 basic.forever(function() {
-    if (pump_running && !input.buttonIsPressed(Button.A)) {
+    if (!input.buttonIsPressed(Button.A)) {
+        return
+    }
+
+    if (pump_running) {
         return
     }
     
