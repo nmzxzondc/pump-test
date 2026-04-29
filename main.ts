@@ -1,4 +1,4 @@
-let test_to_get_time_to_fill_cup = false
+let test_to_get_time_to_fill_cup = true
 let test_duration_secs = 10
 
 let pump_running = false
@@ -48,7 +48,7 @@ function RunCheck() {
 }
 
 basic.showString("O")
-basic.forever(RunCheck)
+//basic.forever(RunCheck)
 
 function RunPump(duration: number) {
     SuperBitV2.MotorRun(SuperBitV2.enMotors.M1, pump_speed)
@@ -85,8 +85,11 @@ basic.forever(function () {
 }) */ // old version
 
 basic.forever(function() {
-    if (pump_running && !input.buttonIsPressed(Button.A)) {
-        showString("db")
+    if (!input.buttonIsPressed(Button.A)) {
+        return
+    }
+
+    if (pump_running) {
         return
     }
     
@@ -100,4 +103,10 @@ basic.forever(function() {
     }
     pump_running = false
 
-}) // cleaned up version
+})
+
+input.onButtonPressed(Button.A, function() {
+    if (pump_running) {
+        showString("db")
+    }
+})
