@@ -16,6 +16,7 @@ let time_to_fill_1ml = (time_to_fill_cup / total_cup_capcity_ml)
 error codes: 
 ml: the milliliters_to_draw is greater than the cup's total capacity
 lib: the SuperBitV2 library was either not found/installed or SuperBitV2.enMotors.M1 was not found
+sm: the inputted total cup capacity is lower than 400; 400 being the average solo cup capacity
 
 normal codes:
 O: on, nothing running
@@ -41,6 +42,10 @@ function RunCheck() {
     }
     if (!SuperBitV2.enMotors.M1) {
         showString("LIB")
+        basic.pause(10 * 1000)
+    }
+    if (total_cup_capcity_ml < 400) {
+        showString("SM")
         basic.pause(10 * 1000)
     }
 
