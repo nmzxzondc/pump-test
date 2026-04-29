@@ -46,7 +46,6 @@ function RunCheck() {
     if (milliliters_to_draw < 0) {
         pump_speed = pump_speed * -1
         milliliters_to_draw = milliliters_to_draw * -1
-        return
     }
 
     basic.pause(10 * 1000)
