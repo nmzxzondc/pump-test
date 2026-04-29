@@ -32,24 +32,24 @@ function showString(text: string) {
 
 
 function RunCheck() {
-    if (milliliters_to_draw < 0) {
-        pump_speed = pump_speed * -1
-        milliliters_to_draw = milliliters_to_draw * -1
-    }
+
     if (milliliters_to_draw > total_cup_capcity_ml) {
         showString("ML")
-        basic.pause(10 * 1000)
     }
     if (!SuperBitV2.enMotors.M1) {
         showString("LIB")
-        basic.pause(10 * 1000)
     }
     if (total_cup_capcity_ml < 400) {
         showString("SM")
-        basic.pause(10 * 1000)
+    }
+    
+    if (milliliters_to_draw < 0) {
+        pump_speed = pump_speed * -1
+        milliliters_to_draw = milliliters_to_draw * -1
+        return
     }
 
-    return
+    basic.pause(10 * 1000)
 }
 
 basic.showString("O")
