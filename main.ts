@@ -16,7 +16,6 @@ let time_to_fill_1ml = (time_to_fill_cup / total_cup_capcity_ml)
 error codes: 
 ml: the milliliters_to_draw is greater than the cup's total capacity
 lib: the SuperBitV2 library was either not found/installed or SuperBitV2.enMotors.M1 was not found
-db: the pump function (RunPump) is already running.
 
 normal codes:
 O: on, nothing running
@@ -90,6 +89,7 @@ basic.forever(function() {
     }
 
     if (pump_running) {
+        showString("db")
         return
     }
     
@@ -103,10 +103,4 @@ basic.forever(function() {
     }
     pump_running = false
 
-})
-
-input.onButtonPressed(Button.A, function() {
-    if (pump_running) {
-        showString("db")
-    }
 })
