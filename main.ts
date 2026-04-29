@@ -1,4 +1,4 @@
-let test_to_get_time_to_fill_cup = false
+let test_to_get_time_to_fill_cup = true
 let test_duration_secs = 10
 
 let pump_running = false
@@ -88,7 +88,6 @@ basic.forever(function() {
     }
 
     if (pump_running) {
-        showString("db")
         return
     }
     
