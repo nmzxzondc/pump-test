@@ -1,4 +1,4 @@
-let test_to_get_time_to_fill_cup = true
+let test_to_get_time_to_fill_cup = false
 let test_duration_secs = 10
 
 let pump_running = false
@@ -54,14 +54,13 @@ function RunPump(duration: number) {
     basic.pause(duration)
     SuperBitV2.MotorStopAll()
 
+    showString("FINI")
     showString("O")
 }
 
 function DrawMilliliters(ml: number) {
     let time_to_fill = time_to_fill_1ml * ml
     RunPump(time_to_fill)
-
-    showString("FINI")
 }
 
 /*
