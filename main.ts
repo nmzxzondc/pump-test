@@ -21,7 +21,8 @@ db: the pump function (RunPump) is already running.
 normal codes:
 O: on, nothing running
 T: test to get time running
-P: pump running
+P: pump started/is running
+FINI: pump finished running
  */
 
 function showString(text: string) {
@@ -84,27 +85,19 @@ basic.forever(function () {
 }) */ // old version
 
 basic.forever(function() {
-    if (!input.buttonIsPressed(Button.A)) {
-        return
-    }
-
-    if (pump_running) {
+    if (pump_running && !input.buttonIsPressed(Button.A)) {
         showString("db")
         return
     }
-
+    
     pump_running = true
-
     if (test_to_get_time_to_fill_cup) {
         showString("T")
-        RunPump(test_duration_secs * 1000)
-        pump_running = false
-        return
+        RunPump(test_duration_secs * 1000)      
+    } else {
+        showString("P")
+        DrawMilliliters(milliliters_to_draw)
     }
-
-    showString("P")
-    DrawMilliliters(milliliters_to_draw)
-
     pump_running = false
 
 }) // cleaned up version
