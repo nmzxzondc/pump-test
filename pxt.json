@@ -6,7 +6,7 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "SuperBitV2": "github:YahboomTechnology/SuperBitLibV2#2dc96afd11a4510601a9c4f55b94ae4b1a6ec229"
+        "SuperBitV2": "github:yahboomtechnology/superbitlibv2#2dc96afd11a4510601a9c4f55b94ae4b1a6ec229"
     },
     "files": [
         "main.blocks",
