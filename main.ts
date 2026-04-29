@@ -1,10 +1,10 @@
-let test_to_get_time_to_fill_cup = true
+let test_to_get_time_to_fill_cup = false
 let test_duration_secs = 10
 
 let pump_running = false
 let pump_speed = 255
 
-let milliliters_to_draw = 250
+let milliliters_to_draw = -250
 
 let total_cup_capcity_ml = 798
 let time_to_fill_cup = 10
@@ -33,6 +33,7 @@ function showString(text: string) {
 function RunCheck() {
     if (milliliters_to_draw < 0) {
         pump_speed = pump_speed * -1
+        milliliters_to_draw = milliliters_to_draw * -1
     }
     if (milliliters_to_draw > total_cup_capcity_ml) {
         showString("ML")
@@ -47,7 +48,7 @@ function RunCheck() {
 }
 
 basic.showString("O")
-//basic.forever(RunCheck)
+basic.forever(RunCheck)
 
 function RunPump(duration: number) {
     SuperBitV2.MotorRun(SuperBitV2.enMotors.M1, pump_speed)
@@ -82,7 +83,7 @@ basic.forever(function () {
     }
 }) */ // old version
 
-basic.forever(function() {
+basic.forever(function () {
     if (!input.buttonIsPressed(Button.A)) {
         return
     }
@@ -90,11 +91,11 @@ basic.forever(function() {
     if (pump_running) {
         return
     }
-    
+
     pump_running = true
     if (test_to_get_time_to_fill_cup) {
         showString("T")
-        RunPump(test_duration_secs * 1000)      
+        RunPump(test_duration_secs * 1000)
     } else {
         showString("P")
         DrawMilliliters(milliliters_to_draw)
