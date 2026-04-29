@@ -53,7 +53,7 @@ basic.showString("O")
 function RunPump(duration: number) {
     SuperBitV2.MotorRun(SuperBitV2.enMotors.M1, pump_speed)
     basic.pause(duration)
-    SuperBitV2.MotorStopAll
+    SuperBitV2.MotorStopAll()
 
     showString("O")
 }
